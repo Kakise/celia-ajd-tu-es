@@ -4,6 +4,17 @@ import './App.css';
 import * as json from './names.json';
 
 class App extends Component {
+    constructor() {
+        super();
+        let lastItem = null;
+
+        Object.keys(json.default).forEach(function(key, i) {
+            lastItem = i;
+        });
+
+        const line = Math.floor(Math.random() * Math.floor(lastItem));
+        this.state = {name: json.default[line.toString()]};
+    }
   getName() {
       let lastItem = null;
 
@@ -12,17 +23,16 @@ class App extends Component {
       });
 
       const line = Math.floor(Math.random() * Math.floor(lastItem));
-      return json.default[line.toString()];
+      this.setState({name: json.default[line.toString()]});
   }
   render () {
-      let text = this.getName();
     return (
-        <div className="App">
+        <div className="App" onClick={() => {this.getName();}}>
           <header className="App-header">
             <p>
               Célia, aujourd'hui tu es...
             </p>
-              {text} !
+              {this.state.name} !
           </header>
         </div>
     );
