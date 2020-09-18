@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import * as json from './names.json';
+
+class App extends Component {
+  getName() {
+      let lastItem = null;
+
+      Object.keys(json.default).forEach(function(key, i) {
+          lastItem = i;
+      });
+
+      const line = Math.floor(Math.random() * Math.floor(lastItem));
+      return json.default[line.toString()];
+  }
+  render () {
+      let text = this.getName();
+    return (
+        <div className="App">
+          <header className="App-header">
+            <p>
+              Célia, aujourd'hui tu es...
+            </p>
+              {text} !
+          </header>
+        </div>
+    );
+  }
 }
 
 export default App;
